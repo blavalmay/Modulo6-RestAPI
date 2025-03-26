@@ -1,20 +1,12 @@
 import { Character } from './character.api-model';
-import { Lookup } from '#common/models';
 
-// export const getHotel = async (id: string): Promise<Hotel> => {
-//   return mockHotelCollection.find((h) => h.id === id);
-// };
+const characterUrl = "https://rickandmortyapi.com/api/character";
 
-// export const getCities = async (): Promise<Lookup[]> => {
-//   return mockCities;
-// };
-
-// export const saveHotel = async (hotel: Hotel): Promise<boolean> => {
-//   return true;
-// };
-
-export const getCharacter = async (id: string) => {};
-
-export const saveCharacter = async (character: Character): Promise<boolean> => {
-  return true;
+export const getCharacter = async (id: string): Promise<Character> => {
+  const response = await fetch(`${characterUrl}/${id}`);
+  if (response.ok) {
+    return await response.json();
+  } else {
+    throw Error(response.statusText);
+  }
 };

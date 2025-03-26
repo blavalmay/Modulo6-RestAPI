@@ -1,15 +1,12 @@
 import { CharacterEntityApi } from './character-collection.api-model';
 
-// let hotelCollection = [...mockHotelCollection];
+const characterUrl = "https://rickandmortyapi.com/api/character";
 
-// export const getHotelCollection = async (): Promise<CharacterEntityApi[]> => {
-//   return hotelCollection;
-// };
-
-// export const deleteHotel = async (id: string): Promise<boolean> => {
-//   hotelCollection = hotelCollection.filter((h) => h.id !== id);
-//   return true;
-// };
-
-export const getCharacterCollection = async () => {};
-export const deleteCharacter = async () => {};
+export const getCharacterCollection = async (): Promise<CharacterEntityApi> => {
+  const response = await fetch(characterUrl);
+  if (response.ok) {
+    return await response.json();
+  } else {
+    throw Error(response.statusText);
+  }
+};

@@ -1,4 +1,14 @@
 export interface CharacterEntityApi {
+  info: {
+    count: number;
+    next: string | null;
+    pages: number;
+    prev: string | null;
+  }
+  results: CharacterEntityApiResults[];
+}
+
+export interface CharacterEntityApiResults {
   id: number;
   name: string;
   status: string;
