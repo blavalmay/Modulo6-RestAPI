@@ -5,21 +5,29 @@ import * as classes from './character-collection.styles';
 
 interface Props {
   characterCollection: CharacterEntityVm[];
+  characterCollectionMock: CharacterEntityVm[];
   onSeeCharacter: (id: string) => void;
 }
 
 export const CharacterCollectionComponent: React.FunctionComponent<Props> = (
   props
 ) => {
-  const { characterCollection, onSeeCharacter } = props;
+  const { characterCollection, characterCollectionMock, onSeeCharacter } = props;
 
   return (
     <div className={classes.root}>
       <ul className={classes.list}>
         {characterCollection.map((character) => (
           <li key={character.id}>
-            <CharacterCard character={character} onSeeCharacter={onSeeCharacter} />
-          </li>
+          <CharacterCard
+            character={
+              parseInt(character.id) <= characterCollectionMock.length
+                ? characterCollectionMock[parseInt(character.id) - 1]
+                : character
+            }
+            onSeeCharacter={onSeeCharacter}
+          />
+        </li>
         ))}
       </ul>
     </div>

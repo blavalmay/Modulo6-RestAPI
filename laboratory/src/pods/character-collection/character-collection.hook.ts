@@ -3,9 +3,13 @@ import { CharacterEntityVm } from './character-collection.vm';
 import { getCharacterCollection } from './api';
 import { mapFromApiToVm } from './character-collection.mapper';
 import { mapToCollection } from '#common/mappers';
+import { characters } from '../../../server/src/mock-data';
 
 export const useCharacterCollection = () => {
   const [characterCollection, setCharacterCollection] = React.useState<CharacterEntityVm[]>(
+    []
+  );
+  const [characterCollectionMock, setCharacterCollectionMock] = React.useState<CharacterEntityVm[]>(
     []
   );
 
@@ -13,7 +17,8 @@ export const useCharacterCollection = () => {
     getCharacterCollection().then((result) =>
       setCharacterCollection(mapToCollection(result.results, mapFromApiToVm))
     );
+    setCharacterCollectionMock(mapToCollection(characters, mapFromApiToVm))
   };
 
-  return { characterCollection, loadCharacterCollection };
+  return { characterCollection, characterCollectionMock, loadCharacterCollection };
 };
