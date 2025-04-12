@@ -9,16 +9,12 @@ export const useCharacterCollection = () => {
   const [characterCollection, setCharacterCollection] = React.useState<CharacterEntityVm[]>(
     []
   );
-  const [characterCollectionMock, setCharacterCollectionMock] = React.useState<CharacterEntityVm[]>(
-    []
-  );
 
   const loadCharacterCollection = () => {
     getCharacterCollection().then((result) =>
       setCharacterCollection(mapToCollection(result.results, mapFromApiToVm))
     );
-    setCharacterCollectionMock(mapToCollection(characters, mapFromApiToVm))
   };
 
-  return { characterCollection, characterCollectionMock, loadCharacterCollection };
+  return { characterCollection, loadCharacterCollection };
 };

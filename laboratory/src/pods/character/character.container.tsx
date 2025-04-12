@@ -6,15 +6,13 @@ import { mapCharacterFromApiToVm } from './character.mappers';
 import { CharacterComponent } from './character.component';
 import { characters } from '../../../server/src/mock-data';
 
-export const CharacterContainer: React.FunctionComponent = (props) => {
+export const CharacterContainer: React.FunctionComponent = () => {
   const [character, setCharacter] = React.useState<Character>(createEmptyCharacter());
-  const [characterMock, setCharacterMock] = React.useState<Character>(createEmptyCharacter());
   const { id } = useParams<{ id: string }>();
 
   const handleLoadCharacter = async () => {
     const apiCharacter = await api.getCharacter(id);
     setCharacter(mapCharacterFromApiToVm(apiCharacter));
-    setCharacterMock(mapCharacterFromApiToVm(characters[parseInt(id) - 1]))
   };
 
   React.useEffect(() => {
@@ -23,5 +21,5 @@ export const CharacterContainer: React.FunctionComponent = (props) => {
     }
   }, []);
 
-  return <CharacterComponent character={parseInt(id) <= characters.length ? characterMock : character} />;
+  return <CharacterComponent character={character} />;
 };

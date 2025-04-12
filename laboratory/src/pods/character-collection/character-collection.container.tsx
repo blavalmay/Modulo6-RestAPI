@@ -5,7 +5,7 @@ import { useCharacterCollection } from './character-collection.hook';
 import { CharacterCollectionComponent } from './character-collection.component';
 
 export const CharacterCollectionContainer = () => {
-  const { characterCollection, characterCollectionMock, loadCharacterCollection } = useCharacterCollection();
+  const { characterCollection, loadCharacterCollection } = useCharacterCollection();
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -19,7 +19,6 @@ export const CharacterCollectionContainer = () => {
   return (
     <CharacterCollectionComponent
       characterCollection={characterCollection}
-      characterCollectionMock={characterCollectionMock}
       onSeeCharacter={handleSeeCharacter}
     />
   );
