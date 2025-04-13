@@ -5,6 +5,7 @@ export interface Character {
   status: string;
   gender: string;
   species: string;
+  bestSentence?: string;
 }
 
 export const createEmptyCharacter = (): Character => ({
@@ -14,4 +15,5 @@ export const createEmptyCharacter = (): Character => ({
   status: '',
   gender: '',
   species: '',
+  bestSentence: '',
 });

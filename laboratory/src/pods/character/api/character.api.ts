@@ -11,3 +11,18 @@ export const getCharacter = async (id: string): Promise<Character> => {
     throw Error(response.statusText);
   }
 };
+
+export const updateCharacter = async (character: Character): Promise<boolean> => {
+  if(character.id) {
+    await fetch(`${characterUrl}/${character.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(character),
+    });
+  } else {
+    throw Error('No character to update');
+  }
+  return true;
+}
