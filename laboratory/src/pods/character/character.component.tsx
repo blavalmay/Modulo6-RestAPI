@@ -1,8 +1,11 @@
 import React from 'react';
 import { Character } from './character.vm';
-import { Button, Card, CardContent, CardHeader, CardMedia, Typography } from '@mui/material';
+import { Button, Card, CardContent, CardHeader, CardMedia, Container, Stack, Typography } from '@mui/material';
 import { switchRoutes } from '#core/router';
 import { useNavigate } from 'react-router-dom';
+import { TextFieldComponent } from '#common/components';
+import { Form, Formik } from 'formik';
+import * as classes from './character.styles';
 
 interface Props {
   character: Character;
@@ -13,7 +16,7 @@ export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
   const navigate = useNavigate();
 
   return (
-    <>
+    <Container maxWidth="sm" disableGutters>
       <Card>
         <CardHeader
           title={character.name}
@@ -25,12 +28,25 @@ export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
               title={character.name}
               style={{ height: 0, paddingTop: '56.25%', marginBottom: '1rem' }} />
             <Typography variant="subtitle1">
-              Status: {character.status}
+              <strong>Status:</strong> {character.status}
             </Typography>
             <Typography variant="subtitle1">
-              Gender: {character.gender}
+              <strong>Gender:</strong> {character.gender}
             </Typography>
           </div>
+          <Formik onSubmit={() => {}} initialValues={{ bestSentence: '' }}>
+            <Stack direction="row" sx={{ alignItems: "center", flexWrap: 'wrap', gap: 1 }}>
+              <Typography variant="subtitle1" className={classes.title}>
+                <strong>Best sentence:</strong>
+              </Typography>
+              <Form className={classes.form}>
+                <TextFieldComponent name="bestSentence" label="Best sentence" size='small' style={{ margin: 0 }} />
+                <Button type="submit" variant="contained" color="primary">
+                  Save
+                </Button>
+              </Form>
+            </Stack>
+          </Formik>
         </CardContent>
       </Card>
       <Button
@@ -39,6 +55,6 @@ export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
         onClick={() => navigate(switchRoutes.root)} >
           Characters list
       </Button>
-    </>
+    </Container>
   );
 };
