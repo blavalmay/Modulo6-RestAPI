@@ -42,5 +42,37 @@ export const useCharacterCollection = () => {
     }
   };
 
-  return { characterCollection, loadCharacterCollection, setPage, page, totalPages };
+  const searchCharacters = async (query: string, page: number = 1): Promise<CharacterEntityVm[]> => {
+    try {
+      const [localChars, publicRes] = await Promise.all([
+        getLocalCharacterCollection(),
+        fetch(`https://rickandmortyapi.com/api/character/?name=${query}&page=${page}`).then(res => {
+          if (!res.ok) throw new Error('Error fetching public API');
+          return res.json();
+        }),
+      ]);
+
+      setTotalPages(publicRes.info.pages);
+      const publicResults = publicRes.results;
+
+      const merged = publicResults.map((char: CharacterEntityVm) => {
+        const local = localChars.results.find(localChar => Number(localChar.id) === Number(char.id));
+        return local ?? char;
+      });
+
+      return merged;
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  };
+
+  return {
+    characterCollection,
+    loadCharacterCollection,
+    setPage,
+    page,
+    totalPages,
+    searchCharacters
+  };
 };

@@ -5,8 +5,6 @@ export const root = css`
   & > :nth-child(n + 2) {
     margin-top: 2rem;
   }
-  display: flex;
-  flex-direction: column;
 `;
 
 export const list = css`
@@ -25,8 +23,4 @@ export const list = css`
   @media (min-width: ${theme.breakpoints.values.md}px) {
     grid-template-columns: repeat(3, 1fr);
   }
-`;
-
-export const pagination = css`
-  align-self: flex-end;
 `;
