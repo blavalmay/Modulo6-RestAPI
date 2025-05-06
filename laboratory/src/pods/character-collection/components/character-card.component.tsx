@@ -31,9 +31,11 @@ export const CharacterCard: React.FunctionComponent<Props> = (props) => {
           />
         </div>
       </CardContent>
-      <CardActions>
-        <Button size="small" onClick={() => onSeeCharacter(character.id)}>See More</Button>
-      </CardActions>
+      { Number(character.id) < 6 ? (
+        <CardActions>
+          <Button size="small" onClick={() => onSeeCharacter(character.id)}>See More</Button>
+        </CardActions>
+      ) : null }
     </Card>
   );
 };

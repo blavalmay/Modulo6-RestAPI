@@ -5,12 +5,12 @@ import { useCharacterCollection } from './character-collection.hook';
 import { CharacterCollectionComponent } from './character-collection.component';
 
 export const CharacterCollectionContainer = () => {
-  const { characterCollection, loadCharacterCollection } = useCharacterCollection();
+  const { characterCollection, loadCharacterCollection, page, setPage, totalPages } = useCharacterCollection();
   const navigate = useNavigate();
 
   React.useEffect(() => {
     loadCharacterCollection();
-  }, []);
+  }, [page]);
 
   const handleSeeCharacter = (id: string) => {
     navigate(linkRoutes.characterDetails(id));
@@ -20,6 +20,9 @@ export const CharacterCollectionContainer = () => {
     <CharacterCollectionComponent
       characterCollection={characterCollection}
       onSeeCharacter={handleSeeCharacter}
+      currentPage={page}
+      setCurrentPage={setPage}
+      totalPages={totalPages}
     />
   );
 };
