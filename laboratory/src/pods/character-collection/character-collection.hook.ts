@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CharacterEntityVm } from './character-collection.vm';
-import { getLocalCharacterCollection, getPublicCharacterCollection } from './api';
+import { CharacterEntityApiResults, getLocalCharacterCollection, getPublicCharacterCollection } from './api';
 import { mapFromApiToVm } from './character-collection.mapper';
 import { mapToCollection } from '#common/mappers';
 
@@ -55,9 +55,9 @@ export const useCharacterCollection = () => {
       setTotalPages(publicRes.info.pages);
       const publicResults = publicRes.results;
 
-      const merged = publicResults.map((char: CharacterEntityVm) => {
+      const merged = publicResults.map((char: CharacterEntityApiResults) => {
         const local = localChars.results.find(localChar => Number(localChar.id) === Number(char.id));
-        return local ?? char;
+        return local ?? mapFromApiToVm(char);
       });
 
       return merged;
