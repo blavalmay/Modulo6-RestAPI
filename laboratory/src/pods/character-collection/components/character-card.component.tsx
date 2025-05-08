@@ -31,11 +31,9 @@ export const CharacterCard: React.FunctionComponent<Props> = (props) => {
           />
         </div>
       </CardContent>
-      { Number(character.id) < 6 ? (
-        <CardActions>
-          <Button size="small" onClick={() => onSeeCharacter(character.id)}>See More</Button>
-        </CardActions>
-      ) : null }
+      <CardActions>
+        <Button size="small" onClick={() => onSeeCharacter(character.id)}>See More</Button>
+      </CardActions>
     </Card>
   );
 };

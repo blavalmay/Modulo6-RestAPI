@@ -43,7 +43,12 @@ export const CharacterContainer: React.FunctionComponent = () => {
 
   return (
     <>
-      <CharacterComponent character={character} onUpdate={handleUpdate} editField={editField} setEditField={setEditField} />
+      <CharacterComponent
+        character={character}
+        onUpdate={handleUpdate}
+        editField={editField}
+        setEditField={setEditField}
+      />
       <Snackbar
         open={alert.open}
         autoHideDuration={3000}

@@ -38,36 +38,38 @@ export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
               <strong>Gender:</strong> {character.gender}
             </Typography>
           </div>
-          <Formik onSubmit={onUpdate} initialValues={character} enableReinitialize>
-            <Stack direction="row" sx={{ alignItems: "center", flexWrap: 'wrap', gap: 1 }}>
-              <Typography variant="subtitle1" className={classes.title}>
-                <strong>Best sentence:</strong>
-              </Typography>
-              {editField ? (
-              <Form className={classes.form}>
-                <TextFieldComponent name="bestSentence" label="Best sentence" size='small' style={{ margin: 0 }} />
-                <Button type="submit" variant="contained" color="primary">
-                  Save
-                </Button>
-              </Form>
-              ) : (
-                <>
+          {Number(character.id) < 6 ? (
+            <Formik onSubmit={onUpdate} initialValues={character} enableReinitialize>
+              <Stack direction="row" sx={{ alignItems: "center", flexWrap: 'wrap', gap: 1 }}>
                 <Typography variant="subtitle1" className={classes.title}>
-                  {character.bestSentence}
+                  <strong>Best sentence:</strong>
                 </Typography>
-                {character.bestSentence && character.bestSentence !== '' ? (
-                  <IconButton aria-label="edit" color="primary" onClick={() => setEditField(true)}>
-                    <EditIcon />
-                  </IconButton>
-                ) : (
-                  <Button variant="outlined" size='small' onClick={() => setEditField(true)}>
-                    Add
+                {editField ? (
+                <Form className={classes.form}>
+                  <TextFieldComponent name="bestSentence" label="Best sentence" size='small' style={{ margin: 0 }} />
+                  <Button type="submit" variant="contained" color="primary">
+                    Save
                   </Button>
+                </Form>
+                ) : (
+                  <>
+                  <Typography variant="subtitle1" className={classes.title}>
+                    {character.bestSentence}
+                  </Typography>
+                  {character.bestSentence && character.bestSentence !== '' ? (
+                    <IconButton aria-label="edit" color="primary" onClick={() => setEditField(true)}>
+                      <EditIcon />
+                    </IconButton>
+                  ) : (
+                    <Button variant="outlined" size='small' onClick={() => setEditField(true)}>
+                      Add
+                    </Button>
+                  )}
+                  </>
                 )}
-                </>
-              )}
-            </Stack>
-          </Formik>
+              </Stack>
+            </Formik>
+          ) : null }
         </CardContent>
       </Card>
       <Button
